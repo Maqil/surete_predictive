@@ -1,27 +1,21 @@
 import React from "react";
-// import logo from './logo.svg';
-import "./App.css";
-import LoginPage from "./components/login/LoginPage";
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+import Routes from "./routes";
 
+// create our material ui theme using up to date typography variables
+const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true
+  }
+});
+
+// Let's convert App from class to function to get into the mood!
 function App() {
   return (
-    <div className="App">
-      <LoginPage />
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
-    </div>
+    <ThemeProvider theme={theme}>
+      <Routes />
+    </ThemeProvider>
   );
 }
 

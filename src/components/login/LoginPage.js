@@ -1,36 +1,28 @@
+// import React, { useState } from "react";
 import React from "react";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
-import Paper from "@material-ui/core/Paper";
-import Box from "@material-ui/core/Box";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
+// import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
-
-import IconButton from "@material-ui/core/IconButton";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
-
+import {
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Paper,
+  Box,
+  Grid,
+  Typography,
+  IconButton,
+  InputAdornment
+} from "@material-ui/core";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 import AgriAnalyse from "../../img/agri-analyse.png";
 import Logo from "../../img/group-3.png";
+import { useInput } from "../../hooks/form";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      <Link color="inherit" href="https://material-ui.com/">
-        Contact support team
-      </Link>{" "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Terms and conditions
-      </Link>{" "}
-      {/* {new Date().getFullYear()}
-      {"."} */}
-    </Typography>
-  );
-}
+// const mockData = [
+//   { id: 1, email: "ex1@ex.co", password: "ex1" },
+//   { id: 2, email: "ex2@ex.co", password: "ex2" }
+// ];
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -89,15 +81,72 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SignInSide() {
+const validations = {
+  // eslint-disable-next-line
+  EMAIL: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+  Password: /^\d*$/
+};
+
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary">
+      <Link color="inherit" href="https://material-ui.com/">
+        Contact support team
+      </Link>{" "}
+      <Link
+        color="inherit"
+        href="https://material-ui.com/"
+        style={{ marginLeft: "30px" }}
+      >
+        Terms and conditions
+      </Link>{" "}
+      {/* {new Date().getFullYear()}
+      {"."} */}
+    </Typography>
+  );
+}
+
+export default function LoginPage(props) {
+  function handleValidation(value, regex) {
+    if (value && regex && value.match(regex)) return true;
+    // EMTPY
+    else if (!value) {
+      return "empty";
+    } else return false;
+  }
+
+  // // the data we're going to submit, just using a hook to display
+  // const [data, setData] = useState(null);
+
+  // // // the data we're going to submit, just using a hook to display
+  // const [setData] = useState(null);
+
+  // function handleSuccess(data) {
+  //   // we're just setting the state here, but typically this would
+  //   // be sent to the server for further validation and persistence
+  //   setData(data);
+  // }
+
+  //pass in array of hooks to validate onSubmit (that's where the data is)
+  // const submit = useSubmit([email, password], handleSuccess);
+
+  const email = useInput("Email", "", handleValidation, validations.EMAIL);
+  // const password = useInput(
+  //   "Password",
+  //   "",
+  //   handleValidation,
+  //   validations.NUMBER
+  // );
+
   const classes = useStyles();
   const [values, setValues] = React.useState({
-    email: "",
+    email: email.props.value,
     password: "",
     showPassword: false
   });
 
   const handleChange = prop => event => {
+    // console.log(prop, { [prop]: event.target.value });
     setValues({ ...values, [prop]: event.target.value });
   };
 
@@ -107,6 +156,48 @@ export default function SignInSide() {
 
   const handleMouseDownPassword = event => {
     event.preventDefault();
+  };
+
+  // const handleSubmit = event => {
+  //   console.log(props);
+  //   event.preventDefault();
+  //   const { password } = values;
+  //   console.log({ email: email.props.value, password });
+  //   for (const user of mockData) {
+  //     if (email.props.value === user.email) {
+  //       if (password === user.password) {
+  //         alert("Success");
+  //         props.history.push("home");
+  //         break;
+  //       } else {
+  //         alert("invalid password");
+  //       }
+  //     } else {
+  //       console.log("user not found");
+  //     }
+  //   }
+  // };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    const { password } = values;
+    let data = JSON.stringify({
+      email: email.props.value,
+      passwd: password
+    });
+    fetch("http://localhost:8000/signin", {
+      method: "post",
+      headers: { "content-Type": "application/json" },
+      body: data
+    })
+      .then(res => res.json())
+      .then(result => {
+        if (result.success === false) {
+          alert("Invalid email or password \n");
+        } else if (result.success === true) {
+          props.history.push("home");
+        }
+      });
   };
 
   return (
@@ -125,16 +216,12 @@ export default function SignInSide() {
       >
         <div className={classes.paper}>
           <div className={classes.logo}>
-            <img src={AgriAnalyse} />
+            <img src={AgriAnalyse} alt="agrianalyse" />
           </div>
-          <Typography
-            component="h6"
-            variant="h6"
-            className={classes.seconnecter}
-          >
+          <Typography variant="subtitle2" className={classes.seconnecter}>
             Se connecter
           </Typography>
-          <form className={classes.form} noValidate>
+          <form method="POST" className={classes.form} noValidate>
             <TextField
               className={classes.input}
               variant="outlined"
@@ -150,7 +237,14 @@ export default function SignInSide() {
                   notchedOutline: classes.notchedOutline
                 }
               }}
+              {...email.props}
             />
+            {email.props.error && (
+              <Typography variant="caption" color="error">
+                Adresse mail invalide
+              </Typography>
+            )}
+
             <TextField
               className={classes.input}
               variant="outlined"
@@ -187,6 +281,7 @@ export default function SignInSide() {
               type="submit"
               variant="contained"
               className={classes.submit}
+              onClick={handleSubmit}
             >
               Connexion
             </Button>
