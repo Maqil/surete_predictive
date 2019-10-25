@@ -5,9 +5,15 @@ import {
   ExpansionPanelDetails,
   ExpansionPanelSummary
 } from "@material-ui/core";
-// import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import FilterBar from "./FilterBar";
-import Filters from "./Filters2";
+import FilterSearch from "./FilterSearch";
+import { connect } from "react-redux";
+// import AnalyseTable from "../Analyse/AnalyseTable";
+// import Spinner from "../../layouts/spinner/Spinner";
+import FiltersForm from "./FiltersForm";
+import showResults from "../Analyse/showResults";
+// import AnalysesBar from "../Analyse/AnalysesBar";
+
+// import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -15,24 +21,33 @@ const useStyles = makeStyles(theme => ({
   },
   summary: {
     // backgroundImage:
-    //   'url("https://media.istockphoto.com/photos/plant-growing-picture-id510222832?k=6&m=510222832&s=612x612&w=0&h=Pzjkj2hf9IZiLAiXcgVE1FbCNFVmKzhdcT98dcHSdSk=")'
+    //   'url("https:")'
     backgroundColor: "#0084f4"
+    // paddingTop: 70
   }
 }));
 
-export default function PrimarySearchAppBar() {
+function FilterMenu(props) {
   const classes = useStyles();
-
   return (
     <div>
       <ExpansionPanel className={classes.summary}>
         <ExpansionPanelSummary>
-          <FilterBar />
+          <FilterSearch />
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Filters />
+          <FiltersForm onSubmit={showResults} />
         </ExpansionPanelDetails>
       </ExpansionPanel>
+      {/* <AnalysesBar /> */}
+
+      {/* {loading ? <Spinner /> : <AnalysesTable analyses={analyses} />} */}
     </div>
   );
 }
+
+const mapStateToProps = state => ({
+  loading: state.analyses.loading,
+  analyses: state.analyses.analyses
+});
+export default connect(mapStateToProps)(FilterMenu);

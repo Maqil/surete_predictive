@@ -1,7 +1,9 @@
 import React from "react";
+import { Provider } from "react-redux";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import Routes from "./routes";
+import store from "./store";
 
 // create our material ui theme using up to date typography variables
 const theme = createMuiTheme({
@@ -14,7 +16,9 @@ const theme = createMuiTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Routes />
+      <Provider store={store}>
+        <Routes />
+      </Provider>
     </ThemeProvider>
   );
 }

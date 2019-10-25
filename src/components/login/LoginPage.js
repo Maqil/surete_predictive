@@ -1,6 +1,4 @@
-// import React, { useState } from "react";
 import React from "react";
-// import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
@@ -14,15 +12,11 @@ import {
   IconButton,
   InputAdornment
 } from "@material-ui/core";
-import { Visibility, VisibilityOff } from "@material-ui/icons";
-import AgriAnalyse from "../../img/agri-analyse.png";
-import Logo from "../../img/group-3.png";
-import { useInput } from "../../hooks/form";
 
-// const mockData = [
-//   { id: 1, email: "ex1@ex.co", password: "ex1" },
-//   { id: 2, email: "ex2@ex.co", password: "ex2" }
-// ];
+import { Visibility, VisibilityOff } from "@material-ui/icons";
+import AgriAnalyse from "../../layouts/img/agri-analyse.png";
+import Logo from "../../layouts/img/group-3.png";
+import { useInput } from "./formValidation";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -40,14 +34,11 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     margin: theme.spacing(10),
-    // display: "flex",
-    // flexDirection: "column",
     alignItems: "center",
     paddingTop: "50px"
   },
   logo: {
     margin: theme.spacing(7, 0, 0, 0),
-    // backgroundColor: theme.palette.secondary.main
     width: 228,
     height: 57,
     resizeMode: "contain"
@@ -107,6 +98,8 @@ function Copyright() {
 }
 
 export default function LoginPage(props) {
+  // const [redirectToReferrer, setRedirectToReferrer] = useState(false);
+
   function handleValidation(value, regex) {
     if (value && regex && value.match(regex)) return true;
     // EMTPY
@@ -115,28 +108,7 @@ export default function LoginPage(props) {
     } else return false;
   }
 
-  // // the data we're going to submit, just using a hook to display
-  // const [data, setData] = useState(null);
-
-  // // // the data we're going to submit, just using a hook to display
-  // const [setData] = useState(null);
-
-  // function handleSuccess(data) {
-  //   // we're just setting the state here, but typically this would
-  //   // be sent to the server for further validation and persistence
-  //   setData(data);
-  // }
-
-  //pass in array of hooks to validate onSubmit (that's where the data is)
-  // const submit = useSubmit([email, password], handleSuccess);
-
   const email = useInput("Email", "", handleValidation, validations.EMAIL);
-  // const password = useInput(
-  //   "Password",
-  //   "",
-  //   handleValidation,
-  //   validations.NUMBER
-  // );
 
   const classes = useStyles();
   const [values, setValues] = React.useState({
@@ -158,26 +130,6 @@ export default function LoginPage(props) {
     event.preventDefault();
   };
 
-  // const handleSubmit = event => {
-  //   console.log(props);
-  //   event.preventDefault();
-  //   const { password } = values;
-  //   console.log({ email: email.props.value, password });
-  //   for (const user of mockData) {
-  //     if (email.props.value === user.email) {
-  //       if (password === user.password) {
-  //         alert("Success");
-  //         props.history.push("home");
-  //         break;
-  //       } else {
-  //         alert("invalid password");
-  //       }
-  //     } else {
-  //       console.log("user not found");
-  //     }
-  //   }
-  // };
-
   const handleSubmit = event => {
     event.preventDefault();
     const { password } = values;
@@ -195,10 +147,18 @@ export default function LoginPage(props) {
         if (result.success === false) {
           alert("Invalid email or password \n");
         } else if (result.success === true) {
+          // login();
           props.history.push("home");
         }
       });
   };
+
+  // const login = () => {
+  //   props.fakeAuth.authenticate(() => {
+  //     // alert(props.fakeAuth.isAuthenticated);
+  //     // setRedirectToReferrer(true);
+  //   });
+  // };
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -278,6 +238,7 @@ export default function LoginPage(props) {
               }}
             />
             <Button
+              to="/home"
               type="submit"
               variant="contained"
               className={classes.submit}
