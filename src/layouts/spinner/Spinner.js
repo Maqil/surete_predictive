@@ -1,12 +1,17 @@
 import React from "react";
-import spinner from "../img/spinner.gif";
+import spinner from "../img/loading.gif";
 
 function Spinner() {
   return (
-    <div>
+    <div style={{ backgroundColor: "#f3f7fd", height: "100vh" }}>
       <img
         src={spinner}
-        style={{ width: "200px", margin: "auto", display: "block" }}
+        style={{
+          width: 80,
+          margin: "auto",
+          paddingTop: 160,
+          display: "block"
+        }}
         alt="Loading..."
       />
     </div>
