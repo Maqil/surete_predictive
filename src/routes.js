@@ -1,20 +1,49 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
+// import { Router, Route, Switch } from "react-router-dom";
+import { history } from "./helpers";
 import LoginPage from "./components/Login/LoginPage";
-import Home from "./components/Home/Home";
-import { AnalyseDetail } from "./components/Analyse/AnalyseDetail";
 
-import LabHome from "./components/Home/LabHome";
+import { connect } from "react-redux";
 
-function AppRouter() {
+import SnackBar from "./components/SnackBar/SnackBar";
+import Dashboard from "./components/Admin/Dashboard";
+import Map from "./components/Admin/Map";
+
+const NoMatch = ({ location }) => (
+  <div>
+    <h3>
+      Erreur 404: the path <code>{location.pathname}</code> is not defined
+    </h3>
+  </div>
+);
+
+function AppRouter(props) {
+  // console.log(props.user.groups);
   return (
-    <Router>
-      <Route path="/" exact component={LoginPage} />
-      <Route path="/home" component={Home} />
-      {/* <Route path="/details" component={AnalyseDetail} /> */}
-      {/* <Route path="/home" component={LabHome} /> */}
-    </Router>
+    <div>
+      <SnackBar />
+      <Router history={history}>
+        <Switch>
+          <Route exact path="/" component={LoginPage} />
+          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/admin" component={Dashboard} />
+          <Route exact path="/map" component={Map} />
+          <Route component={NoMatch} />
+        </Switch>
+      </Router>
+    </div>
   );
 }
 
-export default AppRouter;
+function mapStateToProps(state) {
+  return {
+    token: state.auth.token,
+    user:
+      typeof state.auth.user === "string"
+        ? JSON.parse(state.auth.user)
+        : state.auth.user
+  };
+}
+
+export default connect(mapStateToProps)(AppRouter);

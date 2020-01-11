@@ -1,0 +1,19 @@
+import { SNACKBAR_SUCCESS, SNACKBAR_ERROR, SNACKBAR_CLEAR } from "./types";
+
+export const showSuccessSnackbar = message => {
+  return dispatch => {
+    dispatch({ type: SNACKBAR_SUCCESS, message });
+  };
+};
+
+export const showErrorSnackbar = message => {
+  return dispatch => {
+    dispatch({ type: SNACKBAR_ERROR, message });
+  };
+};
+
+export const clearSnackbar = () => {
+  return dispatch => {
+    dispatch({ type: SNACKBAR_CLEAR });
+  };
+};

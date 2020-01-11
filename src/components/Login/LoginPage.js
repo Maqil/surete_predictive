@@ -4,9 +4,7 @@ import {
   Button,
   CssBaseline,
   TextField,
-  Link,
   Paper,
-  Box,
   Grid,
   Typography,
   IconButton,
@@ -14,9 +12,18 @@ import {
 } from "@material-ui/core";
 
 import { Visibility, VisibilityOff } from "@material-ui/icons";
-import AgriAnalyse from "../../layouts/img/agri-analyse.png";
-import Logo from "../../layouts/img/group-3.png";
+
+import Logo from "../../layouts/img/ocp.jpg";
 import { useInput } from "./formValidation";
+
+// import { Link } from "react-router-dom";
+
+// Auth
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { login } from "../../actions/authActions";
+import { showErrorSnackbar } from "../../actions/snackbarActions";
+import { clearErrors } from "../../actions/errorActions";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -45,23 +52,26 @@ const useStyles = makeStyles(theme => ({
   },
   form: {
     marginTop: theme.spacing(1),
-    width: "420px",
-    height: "48px"
+    width: "100%" // Fix IE 11 issue.
   },
   seconnecter: {
-    marginTop: "57px"
+    marginTop: 57
   },
   input: {
     background: "white",
     borderRadius: 6
   },
-  submit: {
-    margin: theme.spacing(2, 0, 0, 0),
-    width: "420px",
+  button: {
+    margin: theme.spacing(3, 0, 2),
+    // margin: theme.spacing(2, 0, 0, 0),
+    width: "100%",
     height: "48px",
     borderRadius: 6,
-    backgroundColor: "#0084f4",
-    color: "white"
+    backgroundColor: "#00c48c",
+    color: "white",
+    "&:hover": {
+      backgroundColor: "#00c48c"
+    }
   },
   notchedOutline: {
     borderWidth: "1px",
@@ -78,27 +88,8 @@ const validations = {
   Password: /^\d*$/
 };
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary">
-      <Link color="inherit" href="https://material-ui.com/">
-        Contact support team
-      </Link>{" "}
-      <Link
-        color="inherit"
-        href="https://material-ui.com/"
-        style={{ marginLeft: "30px" }}
-      >
-        Terms and conditions
-      </Link>{" "}
-      {/* {new Date().getFullYear()}
-      {"."} */}
-    </Typography>
-  );
-}
-
-export default function LoginPage(props) {
-  // const [redirectToReferrer, setRedirectToReferrer] = useState(false);
+function LoginPage(props) {
+  const classes = useStyles();
 
   function handleValidation(value, regex) {
     if (value && regex && value.match(regex)) return true;
@@ -110,15 +101,14 @@ export default function LoginPage(props) {
 
   const email = useInput("Email", "", handleValidation, validations.EMAIL);
 
-  const classes = useStyles();
   const [values, setValues] = React.useState({
     email: email.props.value,
     password: "",
+    msg: null,
     showPassword: false
   });
 
   const handleChange = prop => event => {
-    // console.log(prop, { [prop]: event.target.value });
     setValues({ ...values, [prop]: event.target.value });
   };
 
@@ -133,32 +123,16 @@ export default function LoginPage(props) {
   const handleSubmit = event => {
     event.preventDefault();
     const { password } = values;
-    let data = JSON.stringify({
-      email: email.props.value,
-      passwd: password
-    });
-    fetch("http://localhost:8000/signin", {
-      method: "post",
-      headers: { "content-Type": "application/json" },
-      body: data
-    })
-      .then(res => res.json())
-      .then(result => {
-        if (result.success === false) {
-          alert("Invalid email or password \n");
-        } else if (result.success === true) {
-          // login();
-          props.history.push("home");
-        }
-      });
-  };
 
-  // const login = () => {
-  //   props.fakeAuth.authenticate(() => {
-  //     // alert(props.fakeAuth.isAuthenticated);
-  //     // setRedirectToReferrer(true);
-  //   });
-  // };
+    if (
+      email.props.value === "abdelfattah_admin@gmail.com" &&
+      password === "123456"
+    ) {
+      props.history.push("/admin");
+    } else {
+      props.showErrorSnackbar("Ce compte n’existe pas");
+    }
+  };
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -175,18 +149,15 @@ export default function LoginPage(props) {
         className={classes.login}
       >
         <div className={classes.paper}>
-          <div className={classes.logo}>
-            <img src={AgriAnalyse} alt="agrianalyse" />
-          </div>
           <Typography variant="subtitle2" className={classes.seconnecter}>
             Se connecter
           </Typography>
-          <form method="POST" className={classes.form} noValidate>
+          <form method="POST" className={classes.form} onSubmit={handleSubmit}>
             <TextField
               className={classes.input}
               variant="outlined"
               margin="normal"
-              required
+              required={true}
               fullWidth
               id="email"
               label="Adresse mail"
@@ -204,12 +175,11 @@ export default function LoginPage(props) {
                 Adresse mail invalide
               </Typography>
             )}
-
             <TextField
               className={classes.input}
               variant="outlined"
               margin="normal"
-              required
+              required={true}
               fullWidth
               name="password"
               label="Password"
@@ -238,27 +208,34 @@ export default function LoginPage(props) {
               }}
             />
             <Button
-              to="/home"
               type="submit"
               variant="contained"
-              className={classes.submit}
-              onClick={handleSubmit}
+              className={classes.button}
             >
               Connexion
             </Button>
-            <Grid container className={classes.mdpoublie}>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Mot de passe oublié
-                </Link>
-              </Grid>
-            </Grid>
-            <Box mt={5}>
-              <Copyright />
-            </Box>
           </form>
         </div>
       </Grid>
     </Grid>
   );
 }
+
+LoginPage.propTypes = {
+  // isAuthenticated: PropTypes.bool,
+  error: PropTypes.object.isRequired,
+  login: PropTypes.func.isRequired,
+  showErrorSnackbar: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  user: state.auth.user,
+  error: state.error
+});
+
+export default connect(mapStateToProps, {
+  login,
+  showErrorSnackbar,
+  clearErrors
+})(LoginPage);

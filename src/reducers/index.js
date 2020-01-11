@@ -1,9 +1,19 @@
 import { combineReducers } from "redux";
-import searchReducer from "./searchReducer";
-import { reducer as reduxFormReducer } from "redux-form";
+import errorReducer from "./errorReducer";
+import authReducer from "./authReducer";
+import snackbarReducer from "./snackbarReducer";
 
 export default combineReducers({
-  analyses: searchReducer,
-  echantillonnages: searchReducer,
-  form: reduxFormReducer
+  // Auth
+  auth: authReducer,
+  error: errorReducer,
+  // SnackBar
+  snackbar: snackbarReducer
+  // Filters
+
+  // addlot: reduxFormReducer
+  // // searchReducer
+  // analyses: searchReducer,
+  // analysesreqs: searchReducer,
+  // echantillonnages: searchReducer
 });

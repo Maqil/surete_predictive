@@ -54,6 +54,15 @@ app.get("/analyse", (req, res) => {
     });
 });
 
+app.get("/analysereq", (req, res) => {
+  db.collection("analysereq")
+    .find()
+    .toArray((err, result) => {
+      if (err) return console.log(err);
+      res.json(result);
+    });
+});
+
 app.get("/echantillonnage", (req, res) => {
   db.collection("echantillonnage")
     .find()
