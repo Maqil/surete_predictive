@@ -37,9 +37,14 @@ import { useHistory } from "react-router-dom";
 import { logout } from "../../actions/authActions";
 import ChartMonth from "./ChartMonth";
 import ChartPiePort from "./ChartPiePort";
-import { fetchIncidents } from "../../actions/incidentsActions";
+import {
+  fetchIncidents,
+  fetchCountIncidents
+} from "../../actions/incidentsActions";
 import ChartCounterPort from "./ChartCounterPort";
 import ChartCounterUsine from "./ChartCounterUsine";
+import ChartPostPort from "./ChartPostPort";
+import ChartPostUsine from "./ChartPostUsine";
 
 function Copyright() {
   return (
@@ -145,6 +150,7 @@ function Dashboard(props) {
 
   React.useEffect(() => {
     props.fetchIncidents();
+    props.fetchCountIncidents();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -167,6 +173,8 @@ function Dashboard(props) {
   const handleLogout = () => {
     props.history.push("/");
   };
+
+  console.log(props.incidents);
 
   const renderMenu = (
     <Menu
@@ -285,13 +293,18 @@ function Dashboard(props) {
               </Paper>
             </Grid>
             <Grid item xs={12} md={3} lg={6}>
+              <Paper className={fixedHeightPaper}>
+                <ChartPieUsine />
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={3} lg={6}>
               <Paper className={classes.paper}>
                 <ChartPiePort />
               </Paper>
             </Grid>
             <Grid item xs={12} md={3} lg={6}>
               <Paper className={fixedHeightPaper}>
-                <ChartPieUsine />
+                <ChartCounterUsine />
               </Paper>
             </Grid>
             <Grid item xs={12} md={3} lg={6}>
@@ -301,7 +314,12 @@ function Dashboard(props) {
             </Grid>
             <Grid item xs={12} md={3} lg={6}>
               <Paper className={fixedHeightPaper}>
-                <ChartCounterUsine />
+                <ChartPostUsine />
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={3} lg={6}>
+              <Paper className={fixedHeightPaper}>
+                <ChartPostPort />
               </Paper>
             </Grid>
           </Grid>
@@ -315,9 +333,10 @@ function Dashboard(props) {
   );
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({ incidents: state.incidents.incidents });
 
 export default connect(mapStateToProps, {
   fetchIncidents,
+  fetchCountIncidents,
   logout
 })(Dashboard);

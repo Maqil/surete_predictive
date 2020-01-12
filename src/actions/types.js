@@ -18,3 +18,4 @@ export const SNACKBAR_ERROR = "SNACKBAR_ERROR";
 
 // Incidents
 export const FETCH_INCIDENTS = "FETCH_INCIDENTS";
+export const FETCH_COUNTER_BY_DATE = "FETCH_COUNTER_BY_DATE";

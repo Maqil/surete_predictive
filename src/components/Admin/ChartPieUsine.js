@@ -31,7 +31,7 @@ export default function Deposits() {
             ["BAB SOUIRA", 32],
             ["Sotreg", 4],
             ["OIS/M", 9],
-            ["QOIS/C", 48],
+            ["OIS/C", 48],
             ["OIS/D", 16],
             ["CCI", 2]
           ]}

@@ -18,29 +18,30 @@ export default function ChartCounterUsine() {
       <Title>Nombre d'incidents: USINE</Title>
       <div>
         <Chart
-          width={500}
-          height={300}
+          width={600}
+          height={350}
           chartType="BarChart"
           loader={<div>Loading Chart</div>}
           data={[
-            ["City", "2010 Population"],
-            ["New York City, NY", 8175000],
-            ["Los Angeles, CA", 3792000],
-            ["Chicago, IL", 2695000],
-            ["Houston, TX", 2099000],
-            ["Philadelphia, PA", 1526000]
+            ["Type d'incident", "Nombre"],
+            ["Tentative de vol", 29],
+            ["Sit-in", 42],
+            ["Tentative d'intrusion", 15],
+            ["Intrusion", 0],
+            ["Vol", 4],
+            ["Aggression", 17]
           ]}
           options={{
             title: "USINE",
             chartArea: { width: "50%" },
             isStacked: true,
             hAxis: {
-              title: "Total Population",
+              title: "Type d'incident",
               minValue: 0
             },
-            colors: ["#ee9c38"],
+            colors: ["#00c48c"],
             vAxis: {
-              title: "City"
+              title: "Nombre"
             }
           }}
           // For tests

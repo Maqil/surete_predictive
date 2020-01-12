@@ -1,7 +1,8 @@
-import { FETCH_INCIDENTS } from "../actions/types";
+import { FETCH_INCIDENTS, FETCH_COUNTER_BY_DATE } from "../actions/types";
 
 const initialState = {
-  incidents: []
+  incidents: [],
+  incidentsCounterByDate: []
 };
 
 export default function(state = initialState, action) {
@@ -11,7 +12,11 @@ export default function(state = initialState, action) {
         ...state,
         incidents: action.payload
       };
-
+    case FETCH_COUNTER_BY_DATE:
+      return {
+        ...state,
+        incidentsCounterByDate: action.payload
+      };
     default:
       return state;
   }
