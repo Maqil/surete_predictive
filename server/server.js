@@ -23,30 +23,30 @@ MongoClient.connect(
   }
 );
 
-// Authentification
-// SignIn
-app.post("/signin", (req, res) => {
-  db.collection("Admin").findOne(
-    { email: req.body.email, passwd: req.body.passwd },
-    (err, user) => {
-      if (err) throw err;
-      if (!user) {
-        res.status(401).send({
-          success: false,
-          msg: "Authentication failed. User not found."
-        });
-      } else {
-        res.status(200).send({
-          success: true,
-          user: user
-        });
-      }
-    }
-  );
-});
+// // Authentification
+// // SignIn
+// app.post("/signin", (req, res) => {
+//   db.collection("Admin").findOne(
+//     { email: req.body.email, passwd: req.body.passwd },
+//     (err, user) => {
+//       if (err) throw err;
+//       if (!user) {
+//         res.status(401).send({
+//           success: false,
+//           msg: "Authentication failed. User not found."
+//         });
+//       } else {
+//         res.status(200).send({
+//           success: true,
+//           user: user
+//         });
+//       }
+//     }
+//   );
+// });
 
-app.get("/analyse", (req, res) => {
-  db.collection("analyse")
+app.get("/incidents", (req, res) => {
+  db.collection("incidents")
     .find()
     .toArray((err, result) => {
       if (err) return console.log(err);
@@ -54,23 +54,23 @@ app.get("/analyse", (req, res) => {
     });
 });
 
-app.get("/analysereq", (req, res) => {
-  db.collection("analysereq")
-    .find()
-    .toArray((err, result) => {
-      if (err) return console.log(err);
-      res.json(result);
-    });
-});
+// app.get("/analysereq", (req, res) => {
+//   db.collection("analysereq")
+//     .find()
+//     .toArray((err, result) => {
+//       if (err) return console.log(err);
+//       res.json(result);
+//     });
+// });
 
-app.get("/echantillonnage", (req, res) => {
-  db.collection("echantillonnage")
-    .find()
-    .toArray((err, result) => {
-      if (err) return console.log(err);
-      res.json(result);
-    });
-});
+// app.get("/echantillonnage", (req, res) => {
+//   db.collection("echantillonnage")
+//     .find()
+//     .toArray((err, result) => {
+//       if (err) return console.log(err);
+//       res.json(result);
+//     });
+// });
 
 // app.post("/search", (req, res) => {
 //   console.log(req.body.text);

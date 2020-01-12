@@ -19,7 +19,7 @@ export default function Deposits() {
   // const classes = useStyles();
   return (
     <React.Fragment>
-      <Title>Pourcentage d'incidents par site</Title>
+      <Title>Suivi des incidents par zone: USINE</Title>
       <div style={{ marginLeft: -40 }}>
         <Chart
           width={600}
@@ -27,15 +27,20 @@ export default function Deposits() {
           chartType="PieChart"
           loader={<div>Loading Chart</div>}
           data={[
-            ["Site", "compteur"],
-            ["Plateau", 4],
-            ["Port", 658],
-            ["Usine", 111]
+            ["Zone", "Pourcentage"],
+            ["BAB SOUIRA", 32],
+            ["Sotreg", 4],
+            ["OIS/M", 9],
+            ["QOIS/C", 48],
+            ["OIS/D", 16],
+            ["CCI", 2]
           ]}
-          // options={{
-          //   title: "My Daily Activities"
-          // }}
-          rootProps={{ "data-testid": "1" }}
+          options={{
+            title: "USINE",
+            // Just add this option
+            pieHole: 0.4
+          }}
+          rootProps={{ "data-testid": "3" }}
         />
       </div>
     </React.Fragment>

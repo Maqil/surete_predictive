@@ -1,8 +1,3 @@
-// export const SEARCH_ANALYSE = "SEARCH_ANALYSE";
-// export const SEARCH_ANALYSES = "SEARCH_ANALYSES";
-// export const FETCH_ANALYSES = "FETCH_ANALYSES";
-// export const FETCH_ANALYSES_REQS = "FETCH_ANALYSES_REQS";
-// export const FETCH_ECHANTILLONNAGES = "FETCH_ECHANTILLONNAGES";
 export const LOADING = "LOADING";
 
 // Auth
@@ -20,3 +15,6 @@ export const REFRESH_TOKEN = "REFRESH_TOKEN";
 export const SNACKBAR_SUCCESS = "SNACKBAR_SUCCESS";
 export const SNACKBAR_CLEAR = "SNACKBAR_CLEAR";
 export const SNACKBAR_ERROR = "SNACKBAR_ERROR";
+
+// Incidents
+export const FETCH_INCIDENTS = "FETCH_INCIDENTS";

@@ -17,9 +17,10 @@ import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import Chart from "./Chart";
+import ChartItems from "./ChartItems";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
+import ChartPieUsine from "./ChartPieUsine";
 
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -34,6 +35,11 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { logout } from "../../actions/authActions";
+import ChartMonth from "./ChartMonth";
+import ChartPiePort from "./ChartPiePort";
+import { fetchIncidents } from "../../actions/incidentsActions";
+import ChartCounterPort from "./ChartCounterPort";
+import ChartCounterUsine from "./ChartCounterUsine";
 
 function Copyright() {
   return (
@@ -136,6 +142,11 @@ function Dashboard(props) {
   const isMenuOpen = Boolean(anchorEl);
 
   let history = useHistory();
+
+  React.useEffect(() => {
+    props.fetchIncidents();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -253,14 +264,19 @@ function Dashboard(props) {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={8} lg={9}>
+            <Grid item xs={12} md={7} lg={7}>
               <Paper className={fixedHeightPaper}>
-                <Chart />
+                <ChartItems />
               </Paper>
             </Grid>
-            <Grid item xs={12} md={4} lg={3}>
+            <Grid item xs={12} md={3} lg={5}>
               <Paper className={fixedHeightPaper}>
                 <Deposits />
+              </Paper>
+            </Grid>
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                <ChartMonth />
               </Paper>
             </Grid>
             <Grid item xs={12}>
@@ -268,7 +284,28 @@ function Dashboard(props) {
                 <Orders />
               </Paper>
             </Grid>
+            <Grid item xs={12} md={3} lg={6}>
+              <Paper className={classes.paper}>
+                <ChartPiePort />
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={3} lg={6}>
+              <Paper className={fixedHeightPaper}>
+                <ChartPieUsine />
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={3} lg={6}>
+              <Paper className={fixedHeightPaper}>
+                <ChartCounterPort />
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={3} lg={6}>
+              <Paper className={fixedHeightPaper}>
+                <ChartCounterUsine />
+              </Paper>
+            </Grid>
           </Grid>
+
           <Box pt={4}>
             <Copyright />
           </Box>
@@ -281,5 +318,6 @@ function Dashboard(props) {
 const mapStateToProps = state => ({});
 
 export default connect(mapStateToProps, {
+  fetchIncidents,
   logout
 })(Dashboard);
