@@ -1,6 +1,6 @@
 {
   "homepage": "http://Maqil.github.io/surete_predictive",
-  "name": "lims-web",
+  "name": "surete_predictive",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

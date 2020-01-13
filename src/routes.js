@@ -24,9 +24,8 @@ function AppRouter(props) {
   return (
     <div>
       <SnackBar />
-      <HashRouter history={history}>
+      <HashRouter basename="/" history={history}>
         <Switch>
-          <Route exact path="/surete_predictive/" component={LoginPage} />
           <Route exact path="/" component={LoginPage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/admin" component={Dashboard} />
