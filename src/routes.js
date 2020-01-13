@@ -26,7 +26,8 @@ function AppRouter(props) {
       <SnackBar />
       <Router history={history}>
         <Switch>
-          <Route exact path="/surete_predictive" component={LoginPage} />
+          <Route exact path="/surete_predictive/" component={LoginPage} />
+          <Route exact path="/" component={LoginPage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/admin" component={Dashboard} />
           <Route exact path="/map" component={ReactLeaflet} />
