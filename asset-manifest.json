@@ -1,26 +1,26 @@
 {
   "files": {
     "main.css": "/surete_predictive/static/css/main.34de6062.chunk.css",
-    "main.js": "/surete_predictive/static/js/main.2afeeca1.chunk.js",
-    "main.js.map": "/surete_predictive/static/js/main.2afeeca1.chunk.js.map",
-    "runtime-main.js": "/surete_predictive/static/js/runtime-main.2981d303.js",
-    "runtime-main.js.map": "/surete_predictive/static/js/runtime-main.2981d303.js.map",
+    "main.js": "/surete_predictive/static/js/main.c58ce7eb.chunk.js",
+    "main.js.map": "/surete_predictive/static/js/main.c58ce7eb.chunk.js.map",
+    "runtime-main.js": "/surete_predictive/static/js/runtime-main.422b8879.js",
+    "runtime-main.js.map": "/surete_predictive/static/js/runtime-main.422b8879.js.map",
     "static/css/2.17e5ed98.chunk.css": "/surete_predictive/static/css/2.17e5ed98.chunk.css",
-    "static/js/2.b677e28f.chunk.js": "/surete_predictive/static/js/2.b677e28f.chunk.js",
-    "static/js/2.b677e28f.chunk.js.map": "/surete_predictive/static/js/2.b677e28f.chunk.js.map",
+    "static/js/2.08b5c3eb.chunk.js": "/surete_predictive/static/js/2.08b5c3eb.chunk.js",
+    "static/js/2.08b5c3eb.chunk.js.map": "/surete_predictive/static/js/2.08b5c3eb.chunk.js.map",
     "index.html": "/surete_predictive/index.html",
-    "precache-manifest.7fa1298e33edd4734e3813dec0196e5e.js": "/surete_predictive/precache-manifest.7fa1298e33edd4734e3813dec0196e5e.js",
+    "precache-manifest.8e4c190992f5cc1b529e1465a718532a.js": "/surete_predictive/precache-manifest.8e4c190992f5cc1b529e1465a718532a.js",
     "service-worker.js": "/surete_predictive/service-worker.js",
     "static/css/2.17e5ed98.chunk.css.map": "/surete_predictive/static/css/2.17e5ed98.chunk.css.map",
     "static/css/main.34de6062.chunk.css.map": "/surete_predictive/static/css/main.34de6062.chunk.css.map",
-    "static/js/2.b677e28f.chunk.js.LICENSE": "/surete_predictive/static/js/2.b677e28f.chunk.js.LICENSE",
+    "static/js/2.08b5c3eb.chunk.js.LICENSE": "/surete_predictive/static/js/2.08b5c3eb.chunk.js.LICENSE",
     "static/media/ocp.jpg": "/surete_predictive/static/media/ocp.19575afd.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.2981d303.js",
+    "static/js/runtime-main.422b8879.js",
     "static/css/2.17e5ed98.chunk.css",
-    "static/js/2.b677e28f.chunk.js",
+    "static/js/2.08b5c3eb.chunk.js",
     "static/css/main.34de6062.chunk.css",
-    "static/js/main.2afeeca1.chunk.js"
+    "static/js/main.c58ce7eb.chunk.js"
   ]
 }
