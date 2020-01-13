@@ -8,8 +8,8 @@ import { connect } from "react-redux";
 
 import SnackBar from "./components/SnackBar/SnackBar";
 import Dashboard from "./components/Admin/Dashboard";
-// import Map from "./components/Admin/Map";
-import IndexMap from "./components/Admin/IndexMap";
+import ReactLeaflet from "./react-leaflet";
+// import IndexMap from "./components/Admin/IndexMap";
 
 const NoMatch = ({ location }) => (
   <div>
@@ -29,8 +29,8 @@ function AppRouter(props) {
           <Route exact path="/" component={LoginPage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/admin" component={Dashboard} />
-          {/* <Route exact path="/map" component={Map} /> */}
-          <Route exact path="/map" component={IndexMap} />
+          <Route exact path="/map" component={ReactLeaflet} />
+          {/* <Route exact path="/map" component={IndexMap} /> */}
           <Route component={NoMatch} />
         </Switch>
       </Router>

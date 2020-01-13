@@ -11,7 +11,7 @@ export default class ChartItems extends Component {
           style={{
             display: "flex",
             maxWidth: 900,
-            marginLeft: -90,
+            marginLeft: -113,
             marginTop: -10
           }}
         >

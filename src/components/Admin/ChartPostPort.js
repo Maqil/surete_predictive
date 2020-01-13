@@ -15,27 +15,28 @@ import Chart from "react-google-charts";
 //   }
 // });
 
-export default function Deposits() {
-  // const classes = useStyles();
+export default function ChartCounterPort() {
+  //   const classes = useStyles();
   return (
     <React.Fragment>
-      <Title>Pourcentage d'incidents par site</Title>
-      <div style={{ marginLeft: -95 }}>
+      <Title>Nombre d'incidents par poste de travail: PORT</Title>
+      <div>
         <Chart
           width={600}
-          height={380}
+          height={350}
           chartType="PieChart"
           loader={<div>Loading Chart</div>}
           data={[
-            ["Site", "compteur"],
-            ["Plateau", 4],
-            ["Port", 658],
-            ["Usine", 111]
+            ["Post", "Nombre"],
+            ["1er", 135],
+            ["2ème", 83],
+            ["3ème", 440]
           ]}
-          // options={{
-          //   colors: ["#3e68c5", "#00c48c", "#cc4628"]
-          // }}
-          rootProps={{ "data-testid": "1" }}
+          options={{
+            // Just add this option
+            is3D: true
+          }}
+          rootProps={{ "data-testid": "2" }}
         />
       </div>
     </React.Fragment>

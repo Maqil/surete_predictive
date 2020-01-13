@@ -6,7 +6,6 @@ import Drawer from "@material-ui/core/Drawer";
 import Box from "@material-ui/core/Box";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
@@ -19,20 +18,14 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import ChartItems from "./ChartItems";
 import Deposits from "./Deposits";
+import Counter from "./Counter";
 import Orders from "./Orders";
 import ChartPieUsine from "./ChartPieUsine";
-
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import RoomIcon from "@material-ui/icons/Room";
 
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
 
 import { logout } from "../../actions/authActions";
 import ChartMonth from "./ChartMonth";
@@ -45,6 +38,7 @@ import ChartCounterPort from "./ChartCounterPort";
 import ChartCounterUsine from "./ChartCounterUsine";
 import ChartPostPort from "./ChartPostPort";
 import ChartPostUsine from "./ChartPostUsine";
+import NavBar from "./NavBar";
 
 function Copyright() {
   return (
@@ -146,8 +140,6 @@ function Dashboard(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
 
-  let history = useHistory();
-
   React.useEffect(() => {
     props.fetchIncidents();
     props.fetchCountIncidents();
@@ -245,41 +237,26 @@ function Dashboard(props) {
           </IconButton>
         </div>
         <Divider />
-        <List>
-          <div>
-            <ListItem button>
-              <ListItemIcon>
-                <DashboardIcon />
-              </ListItemIcon>
-              <ListItemText primary="Dashboard" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <RoomIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary="Map"
-                onClick={event => {
-                  history.push("/map");
-                }}
-              />
-            </ListItem>
-          </div>
-        </List>
+        <NavBar />
         <Divider />
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={7} lg={7}>
+            <Grid item xs={12} md={12} lg={5}>
               <Paper className={fixedHeightPaper}>
                 <ChartItems />
               </Paper>
             </Grid>
-            <Grid item xs={12} md={3} lg={5}>
+            <Grid item xs={12} md={12} lg={4}>
               <Paper className={fixedHeightPaper}>
                 <Deposits />
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={12} lg={3}>
+              <Paper className={fixedHeightPaper}>
+                <Counter />
               </Paper>
             </Grid>
             <Grid item xs={12}>
@@ -287,37 +264,37 @@ function Dashboard(props) {
                 <ChartMonth />
               </Paper>
             </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <Orders />
               </Paper>
-            </Grid>
-            <Grid item xs={12} md={3} lg={6}>
+            </Grid> */}
+            <Grid item xs={12} md={12} lg={6}>
               <Paper className={fixedHeightPaper}>
                 <ChartPieUsine />
               </Paper>
             </Grid>
-            <Grid item xs={12} md={3} lg={6}>
+            <Grid item xs={12} md={12} lg={6}>
               <Paper className={classes.paper}>
                 <ChartPiePort />
               </Paper>
             </Grid>
-            <Grid item xs={12} md={3} lg={6}>
+            <Grid item xs={12} md={12} lg={6}>
               <Paper className={fixedHeightPaper}>
                 <ChartCounterUsine />
               </Paper>
             </Grid>
-            <Grid item xs={12} md={3} lg={6}>
+            <Grid item xs={12} md={12} lg={6}>
               <Paper className={fixedHeightPaper}>
                 <ChartCounterPort />
               </Paper>
             </Grid>
-            <Grid item xs={12} md={3} lg={6}>
+            <Grid item xs={12} md={12} lg={6}>
               <Paper className={fixedHeightPaper}>
                 <ChartPostUsine />
               </Paper>
             </Grid>
-            <Grid item xs={12} md={3} lg={6}>
+            <Grid item xs={12} md={12} lg={6}>
               <Paper className={fixedHeightPaper}>
                 <ChartPostPort />
               </Paper>

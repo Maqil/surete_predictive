@@ -13,6 +13,7 @@ import {
 
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 
+// import Image from "../../layouts/img/Logo.jpg";
 import Logo from "../../layouts/img/ocp.jpg";
 import { useInput } from "./formValidation";
 
@@ -45,9 +46,9 @@ const useStyles = makeStyles(theme => ({
     paddingTop: "50px"
   },
   logo: {
-    margin: theme.spacing(7, 0, 0, 0),
-    width: 228,
-    height: 57,
+    // margin: theme.spacing(7, 0, 0, 0),
+    width: 100,
+    height: 20,
     resizeMode: "contain"
   },
   form: {
@@ -149,6 +150,9 @@ function LoginPage(props) {
         className={classes.login}
       >
         <div className={classes.paper}>
+          {/* <div className={classes.logo}>
+            <img src={Logo} alt="surete_predictive" />
+          </div> */}
           <Typography variant="subtitle2" className={classes.seconnecter}>
             Se connecter
           </Typography>
