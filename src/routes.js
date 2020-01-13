@@ -1,5 +1,5 @@
 import React from "react";
-import { Router, Route, Switch } from "react-router-dom";
+import { HashRouter, Route, Switch } from "react-router-dom";
 // import { Router, Route, Switch } from "react-router-dom";
 import { history } from "./helpers";
 import LoginPage from "./components/Login/LoginPage";
@@ -24,7 +24,7 @@ function AppRouter(props) {
   return (
     <div>
       <SnackBar />
-      <Router history={history}>
+      <HashRouter history={history}>
         <Switch>
           <Route exact path="/surete_predictive/" component={LoginPage} />
           <Route exact path="/" component={LoginPage} />
@@ -34,7 +34,7 @@ function AppRouter(props) {
           {/* <Route exact path="/map" component={IndexMap} /> */}
           <Route component={NoMatch} />
         </Switch>
-      </Router>
+      </HashRouter>
     </div>
   );
 }
